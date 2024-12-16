@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Icon
@@ -73,14 +74,17 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 //                .align(Alignment.BottomCenter)
 //        )
 //    }
-    Row() {
-        for (i in 1..10) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        items (10) { i ->
             Icon(
-                //        painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 imageVector = Icons.Default.AddCircle,
                 contentDescription = null,
                 modifier = Modifier
                     .background(Color.White)
+                    .size(200.dp)
             )
         }
     }
