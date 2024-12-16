@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -70,12 +73,17 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 //                .align(Alignment.BottomCenter)
 //        )
 //    }
-    Image(
-        painter = painterResource(id = R.drawable.ic_launcher_foreground),
-        contentDescription = null,
-        modifier = Modifier
-            .background(Color.Green)
-    )
+    Row() {
+        for (i in 1..10) {
+            Icon(
+                //        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                imageVector = Icons.Default.AddCircle,
+                contentDescription = null,
+                modifier = Modifier
+                    .background(Color.White)
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
