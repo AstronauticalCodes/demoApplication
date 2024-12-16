@@ -17,10 +17,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,63 +40,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DemoApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                var count = remember{
+                    mutableStateOf(0)
+                }
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.White),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Text(
+                        text = count.value.toString(),
+                        fontSize = 30.sp
                     )
+                    Button(
+                        onClick = {
+                            count.value++
+                        }
+                    ) {
+                        Text(text = "Click Me!")
+
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Box(
-////            .fillMaxSize()
-////            .fillMaxWidth()
-//    ) {
-//        Text(
-//            text = "Hello $name!",
-//            fontSize = 40.sp,
-//            modifier = Modifier
-//                .background(Color.Red)
-//                .padding(16.dp)
-//                .background(Color.Gray)
-//                .align(Alignment.Center)
-////                .fillMaxSize()
-//        )
-//        Text(
-//            text = "asdf",
-//            fontSize = 40.sp,
-//            modifier = Modifier
-//                .background(Color.Red)
-//                .padding(16.dp)
-//                .background(Color.Gray)
-//                .align(Alignment.BottomCenter)
-//        )
-//    }
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        items (10) { i ->
-            Icon(
-                imageVector = Icons.Default.AddCircle,
-                contentDescription = null,
-                modifier = Modifier
-                    .background(Color.White)
-                    .size(200.dp)
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DemoApplicationTheme {
-        Greeting("Android")
     }
 }
