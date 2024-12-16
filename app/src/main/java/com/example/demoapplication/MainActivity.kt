@@ -1,6 +1,8 @@
 package com.example.demoapplication
 
+import android.graphics.fonts.SystemFonts
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,27 +43,45 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DemoApplicationTheme {
-                var count = remember{
-                    mutableStateOf(0)
+//                SystemFonts.getAvailableFonts().forEach {
+//                    Log.d("jeloo", "onCreate: ${it.}")
+//                }
+//                Log.d("jeloo", "onCreate: ${SystemFonts.getAvailableFonts()}")
+                var name = remember {
+                    mutableStateOf("")
+                }
+                var names = remember{
+                    mutableStateOf(listOf<String>())
                 }
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.White),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
+                        .background(Color.Gray)
+                        .padding(16.dp)
                 ) {
-                    Text(
-                        text = count.value.toString(),
-                        fontSize = 30.sp
-                    )
-                    Button(
-                        onClick = {
-                            count.value++
-                        }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
                     ) {
-                        Text(text = "Click Me!")
+                        OutlinedTextField(
+                            value = name.value,
+                            onValueChange = { text ->
+                                name.value = text
+                                            },
+                            label = { Text("Enter Name") },
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(end = 8.dp)
+                        )
+                        Button(
+                            onClick = {
 
+                            }
+                        ) {
+                            Text(
+                                text = "Add to List"
+                            )
+                        }
                     }
                 }
             }
