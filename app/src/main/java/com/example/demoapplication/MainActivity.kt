@@ -12,15 +12,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -70,11 +73,14 @@ class MainActivity : ComponentActivity() {
                             onValueChange = { text ->
                                 name.value = text
                             },
+                            modifier = Modifier.weight(1f)
                         )
+                        Spacer(modifier = Modifier.width(16.dp))
                         Button(
                             onClick = {
                                 if (name.value.isNotBlank()) {
                                     names.value = names.value + name.value
+                                    name.value = ""
                                 }
                             }
                         ) {
@@ -85,7 +91,13 @@ class MainActivity : ComponentActivity() {
                     }
                     LazyColumn {
                         items(names.value) { currentName ->
-                            Text(text = currentName)
+                            Text(
+                                text = currentName,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                            )
+                            Divider()
                         }
                     }
                 }
