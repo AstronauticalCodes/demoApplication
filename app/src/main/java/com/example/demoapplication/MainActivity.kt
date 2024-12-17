@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Button
@@ -58,6 +59,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.Gray)
                         .padding(16.dp)
+                        .padding(top = 60.dp)
                 ) {
                     Row(
                         modifier = Modifier
@@ -67,20 +69,23 @@ class MainActivity : ComponentActivity() {
                             value = name.value,
                             onValueChange = { text ->
                                 name.value = text
-                                            },
-                            label = { Text("Enter Name") },
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(end = 8.dp)
+                            },
                         )
                         Button(
                             onClick = {
-
+                                if (name.value.isNotBlank()) {
+                                    names.value = names.value + name.value
+                                }
                             }
                         ) {
                             Text(
                                 text = "Add to List"
                             )
+                        }
+                    }
+                    LazyColumn {
+                        items(names.value) { currentName ->
+                            Text(text = currentName)
                         }
                     }
                 }
